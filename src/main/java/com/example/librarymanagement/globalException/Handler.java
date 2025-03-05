@@ -1,7 +1,9 @@
 package com.example.librarymanagement.globalException;
 
 
+import com.example.librarymanagement.exceptiionHnadler.BookWithIdBorrowedException;
 import com.example.librarymanagement.exceptiionHnadler.BookWithIdnotfound;
+import com.example.librarymanagement.exceptiionHnadler.NoDetailsFoundWithGivenInput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +20,22 @@ public class Handler {
         Map<String, String> response = new HashMap<>();
         response.put("error", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(NoDetailsFoundWithGivenInput.class)
+    public ResponseEntity<Map<String, String>> handleNoDeatilsFound(NoDetailsFoundWithGivenInput ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
+    @ExceptionHandler(BookWithIdBorrowedException.class)
+    public ResponseEntity<Map<String, String>> handleNoDeatilsFound(BookWithIdBorrowedException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.GONE);
     }
 
 }

@@ -1,14 +1,11 @@
 package com.example.librarymanagement.controller;
 
-import com.example.librarymanagement.dtos.EditDetailsDto;
-import com.example.librarymanagement.dtos.GetRequestDetailsDto;
-import com.example.librarymanagement.dtos.GetResponseDTo;
-import com.example.librarymanagement.dtos.UpdateBooksDto;
+import com.example.librarymanagement.dtos.*;
 import com.example.librarymanagement.service.ServiceInterface;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/library")
@@ -36,6 +33,29 @@ public class ApiController {
     public ResponseEntity<GetResponseDTo> getDetails(@PathVariable("bookCode") long bookCode){
 
        GetResponseDTo response=serviceInterface.getDetails(bookCode);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/searchBy")
+    public ResponseEntity<List<String>> searchBy(@RequestBody SearchRequestDto searchRequestDto){
+
+
+        List<String> response=serviceInterface.searchBy(searchRequestDto);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PostMapping("/borrow/{bookCode}/{userName}")
+    public ResponseEntity<BorrowResponseDto> borrow(@PathVariable("bookCode") long bookCode,@PathVariable("userName") String userName){
+        BorrowResponseDto response=serviceInterface.borrow(bookCode,userName);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/return/{bookCode}")
+    public ResponseEntity<ReturnResponseDto> returning(@PathVariable("bookCode") long bookCode){
+
+        ReturnResponseDto response = serviceInterface.returning(bookCode);
+
         return ResponseEntity.ok(response);
     }
 

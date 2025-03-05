@@ -42,9 +42,52 @@ public class BorrowerDetails {
     }
 
     private double penalty;
+
+    public LocalDateTime getReturnedDate() {
+        return returnedDate;
+    }
+
+    public void setReturnedDate(LocalDateTime returnedDate) {
+        this.returnedDate = returnedDate;
+    }
+
+    private LocalDateTime returnedDate;
+
+    public LocalDateTime getExpectedReturnedDate() {
+        return expectedReturnedDate;
+    }
+
+    public void setExpectedReturnedDate(LocalDateTime expectedReturnedDate) {
+        this.expectedReturnedDate = expectedReturnedDate;
+    }
+
+    private LocalDateTime expectedReturnedDate;
+
+    public Books getBooks() {
+        return books;
+    }
+
+    public void setBooks(Books books) {
+        this.books = books;
+    }
+
     @ManyToOne
     @JoinColumn(name = "book_id")  // This creates the category_id FK in the Books table
     private Books books;
+
+
+    public LocalDateTime getNotEligibleToBorrrow() {
+        return notEligibleToBorrrow;
+    }
+
+    public void setNotEligibleToBorrrow(LocalDateTime notEligibleToBorrrow) {
+        this.notEligibleToBorrrow = notEligibleToBorrrow;
+    }
+
+    private LocalDateTime notEligibleToBorrrow;
+
+
+
 
 
 
